@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     height: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     weight: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     ID: {
@@ -24,17 +24,12 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     expectancy: {
-      type: DataTypes.INTEGER,
-    }
-  });
-  sequelize.define('temperament',{
-    name: {
       type: DataTypes.STRING,
     },
-    ID: {
-      type: Sequelize.UUID,
-      defaultvalue: Sequelize.UUIDV4,
-      primaryKey: true
+    databaseValue: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     }
   });
 };
