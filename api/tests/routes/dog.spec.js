@@ -7,6 +7,8 @@ const { Dog, conn } = require('../../src/db.js');
 const agent = session(app);
 const dog = {
   name: 'Pug',
+  height: 40,
+  weight: 7
 };
 
 describe('Videogame routes', () => {
