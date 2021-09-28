@@ -1,15 +1,14 @@
 const { Router } = require('express');
-const {Dog} = require('../db.js')
+const {Dog, Temperament} = require('../db.js')
 const axios = require('axios')
 const {API_KEY} = process.env
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
-
-const router = Router();
+//Funciones Utiles
 
 const ApiInfo = async function(){
-	const apiURL = await axios.get('https://api.thedogapi.com/v1/breeds')
+	const apiURL = await axios.get('https://api.thedogapi.com/v1/breeds?api_key='+API_KEY)
 	const info = await apiURL.data.map(el =>{
 		return {
 			id: el.id,
@@ -42,21 +41,67 @@ const Api_Database = async function(){
 }
 
 
+//Router
+const router = Router();
+
+
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/', async function(req, res){
-	let dogs_name = req.query.name
-	let general_info = await Api_Database()
+	let dogs_name = req.query.name;
+	let general_info = await Api_Database();
 	if (dogs_name){
-		let dogs = await general_info.filter((dog)=>dog.name.includes(dogs_name.toLowerCase()))
-		dogs.length ? res.status(200).json(dogs) : res.status(404).send('Perro no encontrado')
+		let dogs = await general_info.filter((dog)=>dog.name.toLowerCase().includes(dogs_name.toLowerCase()))
+		dogs.length ? res.status(200).json(dogs) : res.status(404).send('Perro no encontrado');
 	}else{
 		try{
 			return res.status(200).json(general_info);
 		}catch(e){
-			return res.status(500).json('Tuvimos un error con tu peticion')
+			return res.status(500).json('Tuvimos un error con tu peticion');
 		}
 	}
+});
+
+router.get('/:idRaza', async function(req, res){
+	let dog_id = req.params.idRaza;
+	let general_info = await Api_Database();
+	try{
+		let dog = await general_info.filter((dog)=>(dog.id + '') === dog_id)
+			
+		dog.length ? res.status(200).json(dog) : res.status(404).send('Perro no encontrado');
+	}catch(e){
+		res.status(500).send('Tuvimos un error con tu peticion')
+	}
+});
+
+router.post('/', async (req , res)=>{
+	let {name,
+	 height, 
+	 weight, 
+	 id, 
+	 expectancy, 
+	 databaseValue,
+	 temperament} = req.body;
+
+	let new_dog = await Dog.create({
+		name,
+	 	height, 
+	 	weight, 
+	 	id, 
+	 	expectancy, 
+	 	databaseValue
+	})
+
+
+	let temperaments = Temperament.findAll({
+		where: {type : temperament}
+	})
+
+	new_dog.addTemperament(temperaments)
+
+	res.status(200).json('El perro ha sido creado existosamente')
 })
 
 module.exports = router;
