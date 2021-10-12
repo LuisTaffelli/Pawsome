@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: true,
-    }
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
   });
 };

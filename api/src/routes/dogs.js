@@ -1,13 +1,12 @@
 const { Router } = require('express');
-const {Dog, Temperament} = require('../db.js')
-const axios = require('axios')
-const {API_KEY} = process.env
+const {Dog, Temperament} = require('../db.js');
+const {ApiInfo, DatabaseInfo, Api_Database} = require('./utils/Info-Functions.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
 //Funciones Utiles
 
-const ApiInfo = async function(){
+/*const ApiInfo = async function(){
 	const apiURL = await axios.get('https://api.thedogapi.com/v1/breeds?api_key='+API_KEY)
 	const info = await apiURL.data.map(el =>{
 		return {
@@ -39,7 +38,7 @@ const Api_Database = async function(){
 
 	return Mixin;
 }
-
+*/
 
 //Router
 const router = Router();
@@ -78,12 +77,13 @@ router.get('/:idRaza', async function(req, res){
 
 router.post('/', async (req , res)=>{
 	let {name,
-	 height, 
-	 weight, 
-	 id, 
-	 expectancy, 
-	 databaseValue,
-	 temperament} = req.body;
+	height, 
+	weight, 
+	id, 
+	expectancy, 
+	databaseValue,
+	temperament,
+	image} = req.body;
 
 	let new_dog = await Dog.create({
 		name,
@@ -91,7 +91,8 @@ router.post('/', async (req , res)=>{
 	 	weight, 
 	 	id, 
 	 	expectancy, 
-	 	databaseValue
+	 	databaseValue,
+	 	image
 	})
 
 
