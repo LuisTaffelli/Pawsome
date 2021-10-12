@@ -1,5 +1,17 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 99vh;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
 }
 
 .App-logo {

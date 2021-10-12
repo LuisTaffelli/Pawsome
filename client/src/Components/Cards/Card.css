@@ -1,0 +1,28 @@
+.Card-Container {
+	display: flex;
+    border-width: 0.05rem;
+    border-radius: 10%;
+    background-color: rgba(182,175,232,0.8);
+    flex: 1 0 21%;
+    width: 17rem;
+    height: 17rem;
+    margin: 0.75rem 0.75rem;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.54), 0 17px 50px 0 rgba(0,0,0,0.39);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.Card-Container img{
+    border-radius: 100%;
+    flex: 1 0 100%;
+    object-fit: cover;
+    object-position: top;
+    max-height: 20vh;
+    max-width: 20vh;
+}
+
+.Card-Container div{
+	flex: 0 1 auto;
+}

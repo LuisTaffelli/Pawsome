@@ -1,0 +1,52 @@
+.Form-Container{
+	margin: 0 auto;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    max-width: 200px;
+}
+
+.Inner-Form {
+	display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+}
+
+.Inner-Form ul{
+	padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+}
+
+.Temp-Container {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Temp-inner{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.Temp {
+	width: 100%;
+	display: grid;
+	grid-row: 0 / 1;
+}
+.Temp button{
+	grid-row: 0 / 1;
+	justify-self: end;
+}
