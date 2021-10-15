@@ -1,6 +1,5 @@
 const {Dog, Temperament} = require('../../db.js')
-const axios = require('axios')
-const {API_KEY} = process.env
+
 
 
 async function TemperamentComparison(dog, temperament){
@@ -14,7 +13,6 @@ async function TemperamentComparison(dog, temperament){
 			validation = true;
 		}
 	}
-	console.log(validation)
 	return validation;
 }
 

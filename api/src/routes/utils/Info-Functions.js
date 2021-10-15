@@ -25,7 +25,15 @@ const ApiInfo = async function(){
 }
 
 const DatabaseInfo = async function () {
-	const dogs = await Dog.findAll();
+	const dogs = await Dog.findAll({
+		include: {
+			model: Temperament,
+			attributes:['name'],
+			through : {
+				attributes: []
+			}
+		}
+	});
 	const final = dogs.map((dog)=>{
 		return dog.dataValues;
 	})

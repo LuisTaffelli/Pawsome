@@ -79,28 +79,34 @@ router.post('/', async (req , res)=>{
 	let {name,
 	height, 
 	weight, 
-	id, 
 	expectancy, 
 	databaseValue,
 	temperament,
 	image} = req.body;
+	
 
 	let new_dog = await Dog.create({
 		name,
 	 	height, 
 	 	weight, 
-	 	id, 
 	 	expectancy, 
 	 	databaseValue,
 	 	image
 	})
 
+	
+	try{
+		let tempsdb = await Temperament.findAll({
+			where : {
+				name: temperament
+			}
+		})
+		new_dog.addTemperament(tempsdb)
+	}catch(e){
+		console.log(e)
+	}
 
-	let temperaments = Temperament.findAll({
-		where: {type : temperament}
-	})
-
-	new_dog.addTemperament(temperaments)
+	
 
 	res.status(200).json('El perro ha sido creado existosamente')
 })
